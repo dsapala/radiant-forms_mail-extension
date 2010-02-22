@@ -1,4 +1,4 @@
-class MailExtension < Radiant::Extension
+class FormMailExtension < Radiant::Extension
   version "0.3"
   description "Provides support for email forms and generic mailing functionality."
   url "http://github.com/squaretalent/radiant-mail-extension"
@@ -25,7 +25,7 @@ class MailExtension < Radiant::Extension
 
   def activate
     FormController.class_eval do
-      include MailController
+      include FormMailController
       alias_method_chain :process_form, :mail
     end
   end
