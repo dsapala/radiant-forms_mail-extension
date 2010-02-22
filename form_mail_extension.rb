@@ -8,6 +8,21 @@ class MailExtension < Radiant::Extension
     map.resources :mail, :path_prefix => "/pages/:page_id", :controller => "mail"
   end
 
+  extension_config do |config|
+    # Force smtp for Action Mailer on the server
+    ActionMailer::Base.delivery_method = :smtp
+    ActionMailer::Base.raise_delivery_errors = true
+    ActionMailer::Base.smtp_settings = {
+      :enable_starttls_auto => true,
+      :address =>           Radiant::Config['mail.server'],
+      :port =>              Radiant::Config['mail.port'],
+      :domain =>            Radiant::Config['mail.server'],
+      :authentication =>    :plain,
+      :user_name =>         Radiant::Config['mail.user'],
+      :password =>          Radiant::Config['mail.pass']
+    }
+  end
+
   def activate
     FormController.class_eval do
       include MailController

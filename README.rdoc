@@ -3,8 +3,11 @@
 This extension requires 
   http://github.com/squaretalent/radiant-form-extension
 
-== Usage
+== Installation
   git clone git://github.com/squaretalent/radiant-form_mail-extension vendor/extensions/form_mail
+
+  Enable Action Mailer by removing line in environment.rb
+    config.frameworks -= [ :action_mailer ]
 
 == Form Config
 
