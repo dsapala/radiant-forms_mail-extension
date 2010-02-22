@@ -1,6 +1,6 @@
 namespace :radiant do
   namespace :extensions do
-    namespace :mail do
+    namespace :form_mail do
       
       desc "Runs the migration of the Mail extension"
       task :migrate => :environment do

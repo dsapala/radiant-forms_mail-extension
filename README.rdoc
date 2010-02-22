@@ -1,8 +1,24 @@
-= Mail Extension for Radiant
+= Form Mail Extension for Radiant
 
-This extension has been modified to hook into the form extension.
+This extension requires 
+  http://github.com/squaretalent/radiant-form-extension
 
-This isn't ready for public consumption
+== Usage
+  git clone git://github.com/squaretalent/radiant-form_mail-extension
+
+== Form Config
+
+  mail:
+    subject: Hey new email!
+    recipients:
+      - joe.bloggs@email.com
+    from: person@email.com
+    sender:
+    // Optional, read data from a field instead
+    subject_field: title                              //<input type="text" name="title" />
+    from_field: name
+    reply_to_field: name
+    sender_field: name
 
 == History
 
@@ -26,4 +42,3 @@ Seriously restructured again by: Dirk Kelly - squaretalent.com
 == Todo
 
 * Tests
-* Implement a form of error checking in form, using the admin side config
