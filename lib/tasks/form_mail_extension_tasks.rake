@@ -1,14 +1,14 @@
 namespace :radiant do
   namespace :extensions do
-    namespace :form_mail do
+    namespace :forms_mail do
       
       desc "Runs the migration of the Mail extension"
       task :migrate => :environment do
         require 'radiant/extension_migrator'
         if ENV["VERSION"]
-          FormExtension.migrator.migrate(ENV["VERSION"].to_i)
+          FormsMailExtension.migrator.migrate(ENV["VERSION"].to_i)
         else
-          FormExtension.migrator.migrate
+          FormsMailExtension.migrator.migrate
         end
       end
       

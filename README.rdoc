@@ -1,10 +1,10 @@
-= Form Mail Extension for Radiant
+= Forms Mail Extension for Radiant
 
 This extension requires 
-  http://github.com/squaretalent/radiant-form-extension
+  http://github.com/squaretalent/radiant-forms-extension
 
 == Installation
-  git clone git://github.com/squaretalent/radiant-form_mail-extension vendor/extensions/form_mail
+  git clone git://github.com/squaretalent/radiant-forms_mail-extension vendor/extensions/forms_mail
 
   Enable Action Mailer by removing line in environment.rb
     config.frameworks -= [ :action_mailer ]
@@ -45,3 +45,4 @@ Seriously restructured again by: Dirk Kelly - squaretalent.com
 == Todo
 
 * Tests
+* Tidy up configuration of smtp

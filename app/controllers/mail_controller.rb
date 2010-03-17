@@ -14,12 +14,6 @@ module MailController
     
     unless parts.config.nil? or parts.config[:mail].nil?
       mail = Mail.new(form, parts, data)
-      10.times { puts "\n"}
-      puts mail.inspect
-      2.times { puts "\n"}
-      mail.send
-      2.times { puts "\n"}
-      puts mail.sent?
     end
     
     [%(mail=#{mail.sent? ? "true" : "false"})]

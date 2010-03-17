@@ -1,8 +1,7 @@
-class FormMailExtension < Radiant::Extension
+class FormsMailExtension < Radiant::Extension
   version "0.3"
   description "Provides support for email forms and generic mailing functionality."
-  url "http://github.com/squaretalent/radiant-mail-extension"
-  #config "mailing.stmp.user mailing.smtp.pass"
+  url "http://github.com/squaretalent/radiant-forms_mail-extension"
 
   define_routes do |map|
     map.resources :mail, :path_prefix => "/pages/:page_id", :controller => "mail"
@@ -14,9 +13,9 @@ class FormMailExtension < Radiant::Extension
     ActionMailer::Base.raise_delivery_errors = true
     ActionMailer::Base.smtp_settings = {
       :enable_starttls_auto => true,
-      :address =>           Radiant::Config['mail.server'],
+      :address =>           Radiant::Config['mail.smtp'],
       :port =>              Radiant::Config['mail.port'],
-      :domain =>            Radiant::Config['mail.server'],
+      :domain =>            Radiant::Config['mail.smtp'],
       :authentication =>    :plain,
       :user_name =>         Radiant::Config['mail.user'],
       :password =>          Radiant::Config['mail.pass']
