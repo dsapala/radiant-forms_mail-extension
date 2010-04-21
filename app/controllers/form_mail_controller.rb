@@ -1,7 +1,5 @@
 module FormMailController
   
-  attr_accessor :result
-  
   def process_form_with_mail(form, data, page, response)
     
     result = mail!(form, data, page)
@@ -23,7 +21,9 @@ module FormMailController
       result = {
         :mail => {
           :sent => mail.sent?,
-          :message => mail.message
+          :message => mail.message,
+          :subject => mail.subject,
+          :from => mail.from
         }
       }
     end

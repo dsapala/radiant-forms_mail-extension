@@ -1,5 +1,5 @@
 class Mail
-  attr_reader :page, :config, :data, :errors
+  attr_reader :config, :data
   
   def initialize(form, data, page)
     @data, @config = data, form.config[:mail]
@@ -40,7 +40,7 @@ class Mail
   end
   
   def filesize_limit
-    config[:filesize_limit] || 0
+    config[:filesize_limit] || nil
   end
   
   def headers
@@ -55,6 +55,7 @@ class Mail
     Mailer.deliver_generic_mail(
       :recipients => recipients,
       :from => from,
+      :reply_to => reply_to,
       :subject => subject,
       :body => @body,
       :cc => cc,
