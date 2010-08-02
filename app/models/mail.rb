@@ -1,10 +1,29 @@
 class Mail
   attr_reader :config, :data
   
-  def initialize(form, data, page)
-    @data, @config = data, form.config[:mail]
+  def initialize(form, page)
+    @data   = page.data
+    @config = form.config[:mail]
+    @body   = page.render_snippet(form)
+  end
+
+  def create
+    Mailer.deliver_forms_mail(
+      :recipients => recipients,
+      :from => from,
+      :reply_to => reply_to,
+      :subject => subject,
+      :body => @body,
+      :cc => cc,
+      :headers => headers,
+      :files => files,
+      :filesize_limit => filesize_limit
+    )
     
-    @body = page.render_snippet(form)
+    @sent = true
+  rescue Exception => exception
+    @message = exception
+    @sent = false
   end
   
   def from
@@ -31,6 +50,14 @@ class Mail
     @config[:cc]
   end
   
+  def sent?
+    @sent || false
+  end
+  
+  def message
+    @message || nil
+  end
+  
   def files
     res = []
     data.each_value do |d|
@@ -49,33 +76,6 @@ class Mail
       @headers['Return-Path'] = sender
       @headers['Sender'] = sender
     end
-  end
-  
-  def send
-    Mailer.deliver_generic_mail(
-      :recipients => recipients,
-      :from => from,
-      :reply_to => reply_to,
-      :subject => subject,
-      :body => @body,
-      :cc => cc,
-      :headers => headers,
-      :files => files,
-      :filesize_limit => filesize_limit
-    )
-    
-    @sent = true
-  rescue Exception => exception
-    @message = exception
-    @sent = false
-  end
-  
-  def sent?
-    @sent || nil
-  end
-  
-  def message
-    @message || nil
   end
   
 protected
